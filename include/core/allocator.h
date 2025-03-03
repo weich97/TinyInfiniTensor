@@ -28,6 +28,29 @@ namespace infini {
     // HINT: 可以使用一个 map 来存储 free block，key 为 block 的起始/结尾地址，value 为 block 的大小
     // =================================== 作业 ===================================
 
+    struct freeBlockInfo {
+      size_t addr;
+      size_t blockSize;
+    };  
+
+    struct cmpFreeBlockInfo {
+      bool operator()(const freeBlockInfo &a, const freeBlockInfo &b) const {
+          return (a.blockSize != b.blockSize) ? (a.blockSize < b.blockSize)
+                                              : (a.addr < b.addr);
+      }
+    };    
+
+    // free balanced tree, maintains all free memory blocks
+    std::set<freeBlockInfo, cmpFreeBlockInfo> freeBlocks;
+
+    // key: head address offset of the free memory block
+    // value: blockSize of the block
+    std::unordered_map<size_t, size_t> headAddrToBlockSize;
+
+    // key: tail address offset of the free memory block
+    // value: blockSize of the block
+    std::unordered_map<size_t, size_t> tailAddrToBlockSize;    
+
   public:
     Allocator(Runtime runtime);
 

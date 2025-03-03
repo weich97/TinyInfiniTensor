@@ -51,7 +51,11 @@ class Object {
   public:
     virtual ~Object(){};
     virtual string toString() const = 0;
-    void print() { std::cout << toString() << std::endl; }
+    void print() {
+  //    std::cout << "Object begins: " << std::endl;  
+      std::cout << toString() << std::endl; 
+  //    std::cout << "Object ends: " << std::endl;
+    }
     UidBaseType getGuid() const { return guid; }
 };
 

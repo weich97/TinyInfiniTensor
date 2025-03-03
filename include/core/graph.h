@@ -43,6 +43,9 @@ namespace infini
         const OpVec &getOperators() const { return ops; }
         Tensor getTensor(int) const;
 
+        void deleteConnection(Tensor tensor, Operator op);
+        void addConnection(Tensor tensor, Operator op);
+        
         /**
          * @brief Sort the nodes in topological order.
          * It returns true if the sorting is successful.
